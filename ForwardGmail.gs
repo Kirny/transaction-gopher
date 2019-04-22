@@ -1,7 +1,14 @@
 function myFunction() {
   var threads = GmailApp.search("in:Transactions");
-  Logger.log(threads);
   for (var i = 0; i < threads.length; i++) {
-    // logic of calling lambda API endpoint with message
+     var messages = threads[i].getMessages();
+     for (var m = 0; m < messages.length; m++) {
+       var msg = messages[m].getPlainBody();
+       var reg = /\$/;
+       var transactionAmount = reg.exec(msg);
+       //Logger.log(msg);
+       Logger.log(transactionAmount)
+
+     }
   }
 }
